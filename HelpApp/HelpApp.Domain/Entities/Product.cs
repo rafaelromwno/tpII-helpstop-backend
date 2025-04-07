@@ -1,11 +1,12 @@
 ﻿using HelpApp.Domain.Entities;
 using HelpApp.Domain.Validation;
 
-namespace StockApp.Domain.Entities
+namespace HelpApp.Domain.Entities
 {
     public class Product
     {
         #region Atributos
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -13,8 +14,11 @@ namespace StockApp.Domain.Entities
         public int Stock { get; set; }
         public string Image { get; set; }
         public int CategoryId { get; set; }
+        public Category Category { get; set; }
+
         #endregion
 
+        #region Construtores
         public Product(string name, string description, decimal price, int stock, string image)
         {
             ValidateDomain(name, description, price, stock, image);
@@ -27,9 +31,9 @@ namespace StockApp.Domain.Entities
             ValidateDomain(name, description, price, stock, image);
         }
 
+        #endregion
 
-
-        public Category Category { get; set; }
+        #region Validação
 
         private void ValidateDomain(string name, string description, decimal price, int stock, string image)
         {
@@ -51,6 +55,10 @@ namespace StockApp.Domain.Entities
 
             DomainExceptionValidation.When(image.Length > 250, "Invalid image name, too long, maximum 250 characters.");
 
+            DomainExceptionValidation.When(string.IsNullOrEmpty(image), "Invalid image address, image is required.");
+
         }
+
+        #endregion
     }
 }
