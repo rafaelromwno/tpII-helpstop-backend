@@ -21,6 +21,12 @@ namespace HelpApp.Infra.Data.EntitiesConfiguration
 
             builder.HasOne( e => e.Category).WithMany( e => e.Products)
                 .HasForeignKey( e => e.CategoryId );
+
+            builder.HasData(
+                new Product(1, "Mouse Gamer", "Mouse óptico com iluminação RGB", 89.90m, 50, "mouse.jpg") { CategoryId = 1 },
+                new Product(2, "Caixa de Som Bluetooth", "Caixa de som portátil com bateria recarregável", 199.90m, 40, "caixa_som.jpg") { CategoryId = 2 },
+                new Product(3, "Caneca Personalizada", "Caneca de cerâmica com estampa personalizada", 29.90m, 150, "caneca.jpg") { CategoryId = 3 }
+            );
         }
     }
 }
