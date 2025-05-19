@@ -16,4 +16,8 @@
     <ProjectReference Include="..\HelpApp.Infra.IoC\HelpApp.Infra.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Products\Commands\" />
+  </ItemGroup>
+
 </Project>
