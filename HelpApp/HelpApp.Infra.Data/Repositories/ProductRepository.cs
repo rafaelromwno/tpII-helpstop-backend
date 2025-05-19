@@ -2,11 +2,6 @@
 using HelpApp.Domain.Interfaces;
 using HelpApp.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HelpApp.Infra.Data.Repositories
 {
@@ -18,57 +13,34 @@ namespace HelpApp.Infra.Data.Repositories
             _productContext = context;
         }
 
-        public Task<Product> Create(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Product> CreateAsync(Product product)
+        public async Task<Product> Create(Product product)
         {
             _productContext.Add(product);
             await _productContext.SaveChangesAsync();
             return product;
         }
 
-        public Task<Product> GetById(int? id)
+        public async Task<Product> GetById(int? id)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Product> GetByIdAsync(int? id)
-        {
-            return await _productContext.Products.Include(c => c.Category)
+            var product = await _productContext.Products.Include(c => c.Category)
                .SingleOrDefaultAsync(p => p.Id == id);
+
+            return product!;
         }
 
-        public Task<IEnumerable<Product>> GetProducts()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<IEnumerable<Product>> GetProducts()
         {
             return await _productContext.Products.ToListAsync();
         }
 
-        public Task<Product> Remove(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Product> RemoveAsync(Product product)
+        public async Task<Product> Remove(Product product)
         {
             _productContext.Remove(product);
             await _productContext.SaveChangesAsync();
             return product;
         }
 
-        public Task<Product> Update(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Product> UpdateAsync(Product product)
+        public async Task<Product> Update(Product product)
         {
             _productContext.Update(product);
             await _productContext.SaveChangesAsync();
